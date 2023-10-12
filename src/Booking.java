@@ -255,7 +255,7 @@ public class Booking extends javax.swing.JFrame {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String booking = "\n" + EscapeRooms.selectedRoom + "," +  NameField.getText() + "," + SurnameField.getText() + "," + ContactField.getText() + "," + EscapeRooms.staticUserDate.format(format) + "," +  PersonsComboBox.getSelectedIndex() + "," + RequirementsTextArea.getText();
         System.out.println(booking);
-        FileIO.appendToTextFile("booking.txt", booking);
+        FileIO.appendToTextFile("../bookings.txt", booking);
     }
    
     

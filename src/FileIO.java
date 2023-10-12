@@ -8,8 +8,6 @@ import java.nio.file.StandardOpenOption;
 
 public class FileIO {
     
-    public FileIO()
-    {}
     public static String readTextFile(String filepath)
     {
         String finalString = "";
@@ -62,7 +60,31 @@ public class FileIO {
         }
         
     }
+    public static Boolean checkForData(String filepath)
+    {
+        String line = null;
+        Boolean containsdata = true;
+        Path path = Paths.get(filepath);
 
+        try
+        {
+            BufferedReader reader = null; //to read
+            reader = Files.newBufferedReader(path);
+            if((line = reader.readLine()) == null) //line is empty
+            {
+                System.out.println("No data to read!");
+                containsdata = false;
+            }
+            reader.close();
+            
+        }
+
+        catch (IOException io) 
+        {
+            System.out.println("Problem while reading file!");    
+        }
+        return containsdata;
+    }
     public static void main(String[] args) {
         //readTextFile("men.txt"); reading
         //appendToTextFile("men.txt", "hello how are you greg?"); writing

@@ -3,11 +3,14 @@ import java.util.Arrays;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 import java.time.DateTimeException;
+import java.io.File;
+import java.io.IOException;
 import java.time.*;
 import java.time.Year;
 import java.time.YearMonth;
 
 import javax.swing.*;
+import javax.swing.text.html.StyleSheet;
 
 public final class EscapeRooms extends javax.swing.JFrame {
 
@@ -22,17 +25,7 @@ public final class EscapeRooms extends javax.swing.JFrame {
     static LocalDate staticUserDate;
     static int selectedRoom = 0;
     
-    /**
-     * Creates new form EscapeRooms
-     */
-    public EscapeRooms() {
-        initComponents();
-        loadBookings();
-        returnYears();
-        returnDays();
-        setIcons();
-        filterBookings();
-    }
+  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -90,40 +83,40 @@ public final class EscapeRooms extends javax.swing.JFrame {
             }
         });
 
-        BookingGet.setText("Get Bookings");
+        BookingGet.setText("Get Booking(s)");
         BookingGet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BookingGetActionPerformed(evt);
             }
         });
 
+         Room1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RoomActionPerformed(1);
+            }
+        });
+
         Room2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Room2ActionPerformed(evt);
+                RoomActionPerformed(2);
             }
         });
 
         Room3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Room3ActionPerformed(evt);
-            }
-        });
-
-        Room1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Room1ActionPerformed(evt);
+                RoomActionPerformed(3);
             }
         });
 
         Room4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Room4ActionPerformed(evt);
+                RoomActionPerformed(4);
             }
         });
 
         Room5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Room5ActionPerformed(evt);
+                RoomActionPerformed(5);
             }
         });
 
@@ -254,45 +247,16 @@ public final class EscapeRooms extends javax.swing.JFrame {
        updateIcons();
     }//GEN-LAST:event_BookingGetActionPerformed
 
-    private void Room2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Room2ActionPerformed
-        // TODO add your handling code here:
-        selectedRoom = 2;
-        Booking makeBooking = new Booking();
-        makeBooking.currentDate = staticUserDate;
-        makeBooking.setVisible(true);
-    }//GEN-LAST:event_Room2ActionPerformed
+    private void RoomActionPerformed(int selectedRoom)
+    {
+        selectedRoom = this.selectedRoom;
 
-    private void Room3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Room3ActionPerformed
-        // TODO add your handling code here:
-        selectedRoom = 3;
+        System.out.println(selectedRoom);
         Booking makeBooking = new Booking();
+        staticUserDate = LocalDate.now();
         makeBooking.currentDate = staticUserDate;
         makeBooking.setVisible(true);
-    }//GEN-LAST:event_Room3ActionPerformed
-
-    private void Room1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Room1ActionPerformed
-        // TODO add your handling code here:
-        selectedRoom = 1;
-        Booking makeBooking = new Booking();
-        makeBooking.currentDate = staticUserDate;
-        makeBooking.setVisible(true);
-    }//GEN-LAST:event_Room1ActionPerformed
-
-    private void Room4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Room4ActionPerformed
-        // TODO add your handling code here:
-        selectedRoom = 4;
-        Booking makeBooking = new Booking();
-        makeBooking.currentDate = staticUserDate;
-        makeBooking.setVisible(true);
-    }//GEN-LAST:event_Room4ActionPerformed
-
-    private void Room5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Room5ActionPerformed
-        // TODO add your handling code here:
-        selectedRoom = 5;
-        Booking makeBooking = new Booking();
-        makeBooking.currentDate = staticUserDate;
-        makeBooking.setVisible(true);
-    }//GEN-LAST:event_Room5ActionPerformed
+    }
 
     private void AboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AboutActionPerformed
         // TODO add your handling code here:
@@ -309,21 +273,44 @@ public final class EscapeRooms extends javax.swing.JFrame {
         else {
             JOptionPane.getRootFrame().dispose();
         }        
-    }//GEN-LAST:event_ExitActionPerformed
+    }
 
     private void RefreshBookingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshBookingsActionPerformed
         // TODO add your handling code here:
         loadBookings();
         setIcons();
-        filterBookings();
-        updateIcons();
-        
-    }//GEN-LAST:event_RefreshBookingsActionPerformed
+        filterBookings();          
+    }
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        File bookingsFile = new File("../bookings.txt");
+       
+        if (bookingsFile.exists() == false)
+        {
+             try{
+            bookingsFile.createNewFile();
+       //    if (bookingsFile.createNewFile())
+       //    {                           
+       //        System.out.println("AHHHHHHHH");
+       //    }
+            System.out.println("AH");
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        }
+        else
+        {
+            System.out.println("Bookings file already exists!");
+        }
+       
+       
+       
+        //if (.exists())
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -358,6 +345,18 @@ public final class EscapeRooms extends javax.swing.JFrame {
         
         //rest of the main
         
+    }
+
+      /**
+     * Creates new form EscapeRooms
+     */
+    public EscapeRooms() {
+        initComponents();
+        checkBookings();
+        returnYears();
+        returnDays();
+        setIcons();
+        filterBookings();
     }
     public void returnYears()
     {
@@ -395,15 +394,28 @@ public final class EscapeRooms extends javax.swing.JFrame {
         }
     }
     
+    public void checkBookings()
+    {
+        if (FileIO.checkForData("../bookings.txt") == true)
+        {
+                loadBookings();
+        }
+    }
+
     public void loadBookings()
     {
-        /*This method reads out all of the data inside the booking.txt file, then it splits all the data everytime a new line is present, 
+        /*This method reads out all of the data inside the bookings.txt file, then it splits all the data everytime a new line is present, 
         making an array with a booking in each element, then for each booking present a new array split the string everytime a comma is present so a new array
         of all the elements in 1 booking is made, with each element being added in its own array, with a blank space added if there is no extra requirment*/
         
         //ArrayList <String> tempData = new ArrayList<>();
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        String currentData = FileIO.readTextFile("booking.txt");
+
+   
+
+        
+        String currentData = FileIO.readTextFile("../bookings.txt");
+    
         System.out.println(currentData);
         String[] tempData = currentData.split("\n");
         
@@ -430,41 +442,12 @@ public final class EscapeRooms extends javax.swing.JFrame {
                 extraRequirements.add(" ");
                 
         }
-        /*
+    
         for (int i = 0; i < tempData.length; i++) {
             System.out.println("Temp data" + tempData[i]);
         }
+    
         
-        for (int num : roomNumbers)
-        {
-            System.out.println(num);
-        }
-        for (String name : names)
-        {
-            System.out.println(name);
-        }
-        for (String surname : surnames)
-        {
-            System.out.println(surname);
-        }
-        for (String number : contactNumber)
-        {
-            System.out.println(number);
-        }
-        for (LocalDate date : dates)
-        {
-            System.out.println(date);
-        }
-        for (int person : numberOfPersons)
-        {
-            System.out.println(person);
-        }
-        
-        for (String req : extraRequirements)
-        {
-            System.out.println(req);
-        }
-        */
     }
    
     public void filterBookings()
@@ -486,15 +469,14 @@ public final class EscapeRooms extends javax.swing.JFrame {
         }
         // file is being read twice for some reason
         /*if (data.length >= 7 ) extarInfo.add(data[6])else {extrainfo.add("")}*/
+        
         for (int i = 0; i < dates.size(); i++) {
             System.out.println("Checking date: " + i + ": " + dates.get(i));
                 if(dates.get(i).equals(userDate))
                 {
-                    System.out.println("AHHHHHHHHHHHH MATCHING!!!!!!!!!!!!!!");
-                    System.out.println("Matching Date");
+                //System.out.println("Matching Date");
                     filteredBookings.add(roomNumbers.get(i));
-                  //  break;
-                    
+                //System.out.println(userDate);
                 }
             }
         
