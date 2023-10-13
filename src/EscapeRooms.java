@@ -8,9 +8,11 @@ import java.io.IOException;
 import java.time.*;
 import java.time.Year;
 import java.time.YearMonth;
-
+import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.*;
 import javax.swing.text.html.StyleSheet;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public final class EscapeRooms extends javax.swing.JFrame {
 
@@ -64,13 +66,13 @@ public final class EscapeRooms extends javax.swing.JFrame {
         MonthComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "Feburary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
         MonthComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MonthComboBoxActionPerformed(evt);
+                MonthComboBoxActionPerformed();
             }
         });
 
         YearComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                YearComboBoxActionPerformed(evt);
+                YearComboBoxActionPerformed();
             }
         });
 
@@ -79,44 +81,44 @@ public final class EscapeRooms extends javax.swing.JFrame {
 
         DayComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DayComboBoxActionPerformed(evt);
+                DayComboBoxActionPerformed();
             }
         });
 
         BookingGet.setText("Get Booking(s)");
         BookingGet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BookingGetActionPerformed(evt);
+                BookingGetActionPerformed();
             }
         });
 
          Room1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RoomActionPerformed(1);
+                RoomActionPerformed(0);
             }
         });
 
         Room2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RoomActionPerformed(2);
+                RoomActionPerformed(1);
             }
         });
 
         Room3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RoomActionPerformed(3);
+                RoomActionPerformed(2);
             }
         });
 
         Room4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RoomActionPerformed(4);
+                RoomActionPerformed(3);
             }
         });
 
         Room5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RoomActionPerformed(5);
+                RoomActionPerformed(4);
             }
         });
 
@@ -125,7 +127,7 @@ public final class EscapeRooms extends javax.swing.JFrame {
         RefreshBookings.setText("Refresh Bookings");
         RefreshBookings.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RefreshBookingsActionPerformed(evt);
+                RefreshBookingsActionPerformed();
             }
         });
         jMenu1.add(RefreshBookings);
@@ -133,7 +135,7 @@ public final class EscapeRooms extends javax.swing.JFrame {
         Exit.setText("Exit");
         Exit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ExitActionPerformed(evt);
+                ExitActionPerformed();
             }
         });
         jMenu1.add(Exit);
@@ -145,102 +147,46 @@ public final class EscapeRooms extends javax.swing.JFrame {
         About.setText("About");
         About.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AboutActionPerformed(evt);
+                AboutActionPerformed();
             }
         });
         jMenu2.add(About);
 
         jMenuBar1.add(jMenu2);
 
-        setJMenuBar(jMenuBar1);
+         setJMenuBar(jMenuBar1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Day)
-                            .addComponent(MonthNYear))
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(DayComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(MonthComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(BookingGet))
-                        .addGap(15, 15, 15)
-                        .addComponent(YearComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(Room1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Room2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Room3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Room4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Room5))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(ExtraInfo)))
-                .addContainerGap(255, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(MonthNYear)
-                    .addComponent(MonthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(YearComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Day)
-                    .addComponent(DayComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(BookingGet)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addComponent(ExtraInfo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(Room5, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(Room4, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(Room3, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(Room2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(Room1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
 
+
+        setUIPosition();
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void MonthComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MonthComboBoxActionPerformed
+    private void MonthComboBoxActionPerformed() {//GEN-FIRST:event_MonthComboBoxActionPerformed
                 // TODO add your handling code here:
                 System.out.println(MonthComboBox.getSelectedIndex()+1);
-                returnDays();
+                returnDate();
                 setIcons();
                 
     }//GEN-LAST:event_MonthComboBoxActionPerformed
 
-    private void YearComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_YearComboBoxActionPerformed
+    private void YearComboBoxActionPerformed() {//GEN-FIRST:event_YearComboBoxActionPerformed
         // TODO add your handling code here:
                 System.out.println(YearComboBox.getSelectedItem());
-                returnDays();
+                returnDate();
+              //  returnYears();
                 setIcons();
     }//GEN-LAST:event_YearComboBoxActionPerformed
 
-    private void DayComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DayComboBoxActionPerformed
+    private void DayComboBoxActionPerformed() {//GEN-FIRST:event_DayComboBoxActionPerformed
+                //System.out.println(DayComboBox.getSelectedIndex()+1);
+                //returnDays();
+                //setIcons();
         // TODO add your handling code here:
                 
     }//GEN-LAST:event_DayComboBoxActionPerformed
 
-    private void BookingGetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookingGetActionPerformed
+    private void BookingGetActionPerformed() {//GEN-FIRST:event_BookingGetActionPerformed
         // TODO add your handling code here:
        setIcons();
        filterBookings();
@@ -249,7 +195,7 @@ public final class EscapeRooms extends javax.swing.JFrame {
 
     private void RoomActionPerformed(int selectedRoom)
     {
-        selectedRoom = this.selectedRoom;
+        EscapeRooms.selectedRoom = selectedRoom;
 
         System.out.println(selectedRoom);
         Booking makeBooking = new Booking();
@@ -258,12 +204,11 @@ public final class EscapeRooms extends javax.swing.JFrame {
         makeBooking.setVisible(true);
     }
 
-    private void AboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AboutActionPerformed
-        // TODO add your handling code here:
+    private void AboutActionPerformed() {
         new About().setVisible(true);
-    }//GEN-LAST:event_AboutActionPerformed
+    }
 
-    private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
+    private void ExitActionPerformed() {//GEN-FIRST:event_ExitActionPerformed
         // TODO add your handling code here:
         
         int userIn = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?", "Please confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -275,11 +220,11 @@ public final class EscapeRooms extends javax.swing.JFrame {
         }        
     }
 
-    private void RefreshBookingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshBookingsActionPerformed
+    private void RefreshBookingsActionPerformed() {//GEN-FIRST:event_RefreshBookingsActionPerformed
         // TODO add your handling code here:
         loadBookings();
         setIcons();
-        filterBookings();          
+       // filterBookings();          
     }
 
     /**
@@ -292,10 +237,7 @@ public final class EscapeRooms extends javax.swing.JFrame {
         {
              try{
             bookingsFile.createNewFile();
-       //    if (bookingsFile.createNewFile())
-       //    {                           
-       //        System.out.println("AHHHHHHHH");
-       //    }
+
             System.out.println("AH");
         }
         catch (IOException e)
@@ -336,12 +278,9 @@ public final class EscapeRooms extends javax.swing.JFrame {
         //</editor-fold>
             
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new EscapeRooms().setVisible(true);
+        new EscapeRooms().setVisible(true);
                 
-            }
-        });
+            
         
         //rest of the main
         
@@ -353,12 +292,13 @@ public final class EscapeRooms extends javax.swing.JFrame {
     public EscapeRooms() {
         initComponents();
         checkBookings();
-        returnYears();
-        returnDays();
+        loadBookings();
+        returnDate();
         setIcons();
         filterBookings();
     }
-    public void returnYears()
+    
+    public void returnDate()
     {
         //This method gets the current year and adds it along with the next 2 years after it to the YearComboBox
         LocalDate localDate = LocalDate.now();
@@ -366,13 +306,9 @@ public final class EscapeRooms extends javax.swing.JFrame {
         for (int i = 0; i < 3; i++) {
             YearComboBox.addItem(Integer.toString(year + i));
         }
-    }
-    
-    public void returnDays()
-    {
+
         //This method resets all the items in the DayComboBox and gets the amount of days in the month depending on the month and year of that date
         DayComboBox.removeAllItems();
-        System.out.println(YearComboBox.getSelectedItem());
         YearMonth yearMonthObject = YearMonth.of(Integer.parseInt(YearComboBox.getSelectedItem().toString()),MonthComboBox.getSelectedIndex()+1);
         int daysInDate = yearMonthObject.lengthOfMonth();
         for (int i = 0; i < daysInDate; i++) {
@@ -385,7 +321,7 @@ public final class EscapeRooms extends javax.swing.JFrame {
         //This method associates each icon with its given button
         ArrayList <ImageIcon> icons = new ArrayList <ImageIcon>();
         ArrayList <JButton> buttons = new ArrayList <JButton>();
-        icons.addAll(Arrays.asList(new ImageIcon("images//room1_available.png"),new ImageIcon("images//room2_available.png"),new ImageIcon("images//room3_available.png"),new ImageIcon("images//room4_available.png"),new ImageIcon("images//room5_available.png")));
+        icons.addAll(Arrays.asList(new ImageIcon("../images//room1_available.png"),new ImageIcon("../images//room2_available.png"),new ImageIcon("../images//room3_available.png"),new ImageIcon("../images//room4_available.png"),new ImageIcon("../images//room5_available.png")));
         buttons.addAll(Arrays.asList(Room1,Room2,Room3,Room4,Room5));
         
         for (int i = 0; i < 5; i++) {
@@ -409,46 +345,53 @@ public final class EscapeRooms extends javax.swing.JFrame {
         of all the elements in 1 booking is made, with each element being added in its own array, with a blank space added if there is no extra requirment*/
         
         //ArrayList <String> tempData = new ArrayList<>();
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-   
-
-        
-        String currentData = FileIO.readTextFile("../bookings.txt");
+       //DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+       //String currentData = FileIO.readTextFile("../bookings.txt");
     
-        System.out.println(currentData);
-        String[] tempData = currentData.split("\n");
-        
-        for (int i = 0; i < tempData.length; i++) {
-            String[] bookings = tempData[i].split(",");
-            //System.out.println(bookings);
-            
-            /* for (String id : bookings)
-            {
-                System.out.println(id);
-            }*/
-            
+       //System.out.println(currentData);
+       //String[] tempData = currentData.split("\n");
+       //
+       //for (int i = 0; i < tempData.length; i++) {
+       //    String[] bookings = tempData[i].split(",");
+       //    
+       //    roomNumbers.add(Integer.parseInt(bookings[0]));
+       //    names.add(bookings[1]);
+       //    surnames.add(bookings[2]);
+       //    contactNumber.add(bookings[3]);
+       //    dates.add(LocalDate.parse(bookings[4], format));
+       //    numberOfPersons.add(Integer.parseInt(bookings[5]));
+       //    
+       //    if (bookings.length == 7) {
+       //        extraRequirements.add(bookings[6]);
+       //    }
+       //    else
+       //        extraRequirements.add(" ");
+       //        
+       //}
+    
+       //for (int i = 0; i < tempData.length; i++) {
+       //    System.out.println("Temp data" + tempData[i]);
+       //}
+       try {
+        Scanner scanner = new Scanner(new File("../bookings.txt"));
+
+        while (scanner.hasNextLine()) {
+            System.out.println("Found Booking!");
+            String line = scanner.nextLine();
+            String[] bookings = line.split(",");
             roomNumbers.add(Integer.parseInt(bookings[0]));
-            names.add(bookings[1]);
-            surnames.add(bookings[2]);
-            contactNumber.add(bookings[3]);
-            dates.add(LocalDate.parse(bookings[4], format));
-            numberOfPersons.add(Integer.parseInt(bookings[5]));
+            updateIcon(Integer.parseInt(bookings[0]));
             
-            if (bookings.length == 7) {
-                extraRequirements.add(bookings[6]);
-            }
-            else
-                extraRequirements.add(" ");
-                
         }
-    
-        for (int i = 0; i < tempData.length; i++) {
-            System.out.println("Temp data" + tempData[i]);
-        }
-    
-        
+            //updateIcons();
+
+        scanner.close();
+    } catch (FileNotFoundException e) {
+        e.printStackTrace();
     }
+}
+        
+    
    
     public void filterBookings()
     {
@@ -470,17 +413,18 @@ public final class EscapeRooms extends javax.swing.JFrame {
         // file is being read twice for some reason
         /*if (data.length >= 7 ) extarInfo.add(data[6])else {extrainfo.add("")}*/
         
+
         for (int i = 0; i < dates.size(); i++) {
             System.out.println("Checking date: " + i + ": " + dates.get(i));
-                if(dates.get(i).equals(userDate))
-                {
-                //System.out.println("Matching Date");
-                    filteredBookings.add(roomNumbers.get(i));
-                //System.out.println(userDate);
-                }
+            if(dates.get(i).equals(userDate))
+            {
+                filteredBookings.add(roomNumbers.get(i));
             }
+        }
         
-     
+        
+        
+        
         System.out.println(userDate);
         updateIcons();
     }
@@ -489,9 +433,8 @@ public final class EscapeRooms extends javax.swing.JFrame {
     {
         ArrayList <ImageIcon> icons = new ArrayList<ImageIcon>();
         ArrayList <JButton> buttons = new ArrayList<JButton>();
-        icons.addAll(Arrays.asList(new ImageIcon("images//room1_booked.png"),new ImageIcon("images//room2_booked.png"),new ImageIcon("images//room3_booked.png"),new ImageIcon("images//room4_booked.png"),new ImageIcon("images//room5_booked.png")));
+        icons.addAll(Arrays.asList(new ImageIcon("../images//room1_booked.png"),new ImageIcon("../images//room2_booked.png"),new ImageIcon("../images//room3_booked.png"),new ImageIcon("../images//room4_booked.png"),new ImageIcon("../images//room5_booked.png")));
         buttons.addAll(Arrays.asList(Room1,Room2,Room3,Room4,Room5));
-        //System.out.println(filteredBookings.get(0));
         updateLabel();
         
         if (!filteredBookings.isEmpty() ){
@@ -501,9 +444,23 @@ public final class EscapeRooms extends javax.swing.JFrame {
                buttons.get(filteredBookings.get(i)).setEnabled(false);
             }
         }
-        else{
-            System.out.println("i dont know");
-        }
+        
+    }
+
+    public void updateIcon(int index) 
+    {
+        ArrayList <ImageIcon> icons = new ArrayList<ImageIcon>();
+        ArrayList <JButton> buttons = new ArrayList<JButton>();
+        icons.addAll(Arrays.asList(new ImageIcon("../images//room1_booked.png"),new ImageIcon("../images//room2_booked.png"),new ImageIcon("../images//room3_booked.png"),new ImageIcon("../images//room4_booked.png"),new ImageIcon("../images//room5_booked.png")));
+        buttons.addAll(Arrays.asList(Room1,Room2,Room3,Room4,Room5));
+        updateLabel();
+        
+            for (int i = 0; i < index+1 ; i++) {
+               ImageIcon icon = icons.get(index);
+               buttons.get(index).setIcon(icon);
+               buttons.get(index).setEnabled(false);
+            }
+        
         
     }
     
@@ -515,7 +472,77 @@ public final class EscapeRooms extends javax.swing.JFrame {
             guestCount += numberOfPersons.get(filteredBookings.get(i));
         }
         System.out.println("Update LABEL TIME");
-        ExtraInfo.setText("There are " + (5 - filteredBookings.size()) + " rooms avaliable and " + guestCount + " guests who've currently booked.");
+        if (dates.size() == filteredBookings.size())
+        {
+            ExtraInfo.setText("There are " + (5 - guestCount) + " rooms avaliable and " + guestCount + " guests who've currently booked.");
+        }
+    }
+
+    public void setUIPosition()
+    {
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+      getContentPane().setLayout(layout);
+      layout.setHorizontalGroup(
+          layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(layout.createSequentialGroup()
+              .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                  .addGroup(layout.createSequentialGroup()
+                      .addContainerGap()
+                      .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                          .addComponent(Day)
+                          .addComponent(MonthNYear))
+                      .addGap(28, 28, 28)
+                      .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                              .addComponent(DayComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                              .addComponent(MonthComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                          .addComponent(BookingGet))
+                      .addGap(15, 15, 15)
+                      .addComponent(YearComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                  .addGroup(layout.createSequentialGroup()
+                      .addGap(11, 11, 11)
+                      .addComponent(Room1)
+                      .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                      .addComponent(Room2)
+                      .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                      .addComponent(Room3)
+                      .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                      .addComponent(Room4)
+                      .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                      .addComponent(Room5))
+                  .addGroup(layout.createSequentialGroup()
+                      .addContainerGap()
+                      .addComponent(ExtraInfo)))
+              .addContainerGap(255, Short.MAX_VALUE))
+      );
+      layout.setVerticalGroup(
+          layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(layout.createSequentialGroup()
+              .addGap(32, 32, 32)
+              .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                  .addComponent(MonthNYear)
+                  .addComponent(MonthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                  .addComponent(YearComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+              .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                  .addComponent(Day)
+                  .addComponent(DayComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+              .addComponent(BookingGet)
+              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+              .addComponent(ExtraInfo)
+              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+              .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                  .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                      .addComponent(Room5, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                      .addComponent(Room4, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                  .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                      .addComponent(Room3, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                      .addComponent(Room2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                      .addComponent(Room1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
+              .addContainerGap())
+      );
+        
     }
     
     

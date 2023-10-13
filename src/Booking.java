@@ -2,6 +2,7 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
+import java.awt.event.*;
 
 public class Booking extends javax.swing.JFrame {
     
@@ -60,27 +61,26 @@ public class Booking extends javax.swing.JFrame {
         ExtraLabel.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         ExtraLabel.setText("Extra Requirements:");
 
-        NameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NameFieldActionPerformed(evt);
+        NameField.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                NameFieldActionPerformed();
+            }
+        });
+        SurnameField.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                SurnameFieldActionPerformed();
             }
         });
 
-        SurnameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SurnameFieldActionPerformed(evt);
+        ContactField.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                ContactFieldActionPerformed();
             }
         });
 
-        ContactField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ContactFieldActionPerformed(evt);
-            }
-        });
-
-        PersonsComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PersonsComboBoxActionPerformed(evt);
+        PersonsComboBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                PersonsComboBoxActionPerformed();
             }
         });
 
@@ -91,14 +91,14 @@ public class Booking extends javax.swing.JFrame {
         Save.setText("Save");
         Save.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SaveActionPerformed(evt);
+                SaveActionPerformed();
             }
         });
 
         Cancel.setText("Cancel");
-        Cancel.addActionListener(new java.awt.event.ActionListener() {
+        Cancel.addActionListener(new ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CancelActionPerformed(evt);
+                CancelActionPerformed();
             }
         });
 
@@ -174,28 +174,28 @@ public class Booking extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void NameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NameFieldActionPerformed
+    private void NameFieldActionPerformed() {//GEN-FIRST:event_NameFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_NameFieldActionPerformed
 
-    private void SurnameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SurnameFieldActionPerformed
+    private void SurnameFieldActionPerformed() {//GEN-FIRST:event_SurnameFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_SurnameFieldActionPerformed
 
-    private void ContactFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContactFieldActionPerformed
+    private void ContactFieldActionPerformed() {//GEN-FIRST:event_ContactFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ContactFieldActionPerformed
 
-    private void PersonsComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PersonsComboBoxActionPerformed
+    private void PersonsComboBoxActionPerformed() {//GEN-FIRST:event_PersonsComboBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_PersonsComboBoxActionPerformed
 
-    private void CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelActionPerformed
+    private void CancelActionPerformed() {//GEN-FIRST:event_CancelActionPerformed
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_CancelActionPerformed
 
-    private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
+    private void SaveActionPerformed() {//GEN-FIRST:event_SaveActionPerformed
         // TODO add your handling code here:
         validateInputs();
     }//GEN-LAST:event_SaveActionPerformed
@@ -253,7 +253,7 @@ public class Booking extends javax.swing.JFrame {
     public void bookingBuild()
     {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        String booking = "\n" + EscapeRooms.selectedRoom + "," +  NameField.getText() + "," + SurnameField.getText() + "," + ContactField.getText() + "," + EscapeRooms.staticUserDate.format(format) + "," +  PersonsComboBox.getSelectedIndex() + "," + RequirementsTextArea.getText();
+        String booking = "\n\n" + EscapeRooms.selectedRoom + "," +  NameField.getText() + "," + SurnameField.getText() + "," + ContactField.getText() + "," + EscapeRooms.staticUserDate.format(format) + "," +  PersonsComboBox.getSelectedIndex() + "," + RequirementsTextArea.getText();
         System.out.println(booking);
         FileIO.appendToTextFile("../bookings.txt", booking);
     }
@@ -299,11 +299,10 @@ public class Booking extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Booking().setVisible(true);
-            }
-        });
+
+        new Booking().setVisible(true);
+            
+    
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
